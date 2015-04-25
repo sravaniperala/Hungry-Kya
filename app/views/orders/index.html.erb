@@ -1,0 +1,132 @@
+<% if @snacks.count == 0 %>
+  <div class="central bg-image">
+    <h1 class = "light-font">No munchies for you today. To Create Click</h1>
+    <span>
+      <%= link_to 'Create Snack', new_snack_path, class:"btn btn-success central-btn" %>
+    </span>
+  </div>
+  
+<% else %>  
+  <div class="container-fluid">
+    <!-- Row -->
+    <div class="row">
+
+      <!-- div for showing vendor information -->
+      <div class="col-md-6">
+        <div>
+          <h2>Ordering from</h2>
+          <ul>
+          <% @snacks.group("vendor").uniq.each do |snack| %>
+            <h4><li><%= snack.vendor.capitalize if snack.vendor %></li></h4>
+          <% end %>
+          </ul>
+          
+          <br>
+
+          <h4>Overall Orders</h4>
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>
+                Snack Name
+              </th>
+              <th>
+                Total quantity
+              </th>  
+              </tr>  
+            </thead>
+            
+            <tbody>
+              <% @snacks.each do |snack| %>
+              <tr>
+                <td><b><%= snack.name.capitalize %></b></td>
+                <td><%= snack.orders.sum("quantity")%></td>
+              </tr>
+              <% end %>
+            </tbody>
+          </table>
+          
+        </div>
+      </div> 
+      
+      <!-- Div for placing order form -->
+      <p id="notice"><%= notice %></p>
+
+      <div class="col-md-6">
+        <!-- Form for order -->
+        <div class="form-div">
+          <h3>Place an Order</h3><br>
+          <%= form_for(@order) do |f| %>
+            <% if @order.errors.any? %>
+              <div id="error_explanation">
+                <h2><%= pluralize(@order.errors.count, "error") %> prohibited this order from being saved:</h2>
+
+                <ul>
+                <% @order.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+                </ul>
+              </div>
+            <% end %>
+
+            <div class="form-group">
+              <%= f.label :user_id, "Find Yourself"%>
+              <%= f.select :user_id, User.all.collect{|u| [u.name, u.id]}, class: "form-control" %>
+            </div>
+            <div class="form-group">
+              <%= f.label :snack_id, "choose your munchie"%>
+              <%= f.select :snack_id, Snack.all.collect{|s| [s.name, s.id]}, class: "border-radius", class: "form-control" %>
+            </div>
+            <div class="form-group">
+              <%= f.label :quantity %>
+                <%= f.radio_button 'quantity', 1, checked: true %>
+                <%= f.label 1 %>&nbsp;&nbsp;
+                 <%= f.radio_button 'quantity', 2 %>
+                <%= f.label 2 %>&nbsp;&nbsp;
+                <%= f.radio_button 'quantity', 3 %>
+                <%= f.label 3 %>&nbsp;&nbsp;
+                <%= f.radio_button 'quantity', 4 %>
+                <%= f.label 4 %>&nbsp;&nbsp;
+            </div>
+            <br><br>
+            <div class="actions">
+              <%= f.submit "Place Order", class: "btn btn-primary" %>
+            </div>
+          <% end %>
+
+        </div>
+
+      </div>
+    </div><!-- End Row -->
+  </div>
+
+
+  <h1>Listing Orders</h1>
+  <% if @orders.count > 0 %>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Cyborg</th>
+        <th>Snack</th>
+        <th>Quantity</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @orders.each do |order| %>
+        <tr>
+          <td><b><%= order.user.name.capitalize if order.user%></b></td>
+          <td><%= order.snack.name if order.snack%></td>
+          <td><%= order.quantity %></td>
+          <td><%#= link_to 'Show', order %></td>
+          <td><%= link_to 'Edit', edit_order_path(order) %></td>
+          <td><%= link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <% else  %>
+    <h3>No orders placed yet, hurry up!</h3>
+  <% end %>
+<% end %>

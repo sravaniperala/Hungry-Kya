@@ -21,10 +21,15 @@ class SnacksController < ApplicationController
 
   # POST /snacks
   def create
-    @snack = Snack.new(snack_params)
-
-    if @snack.save
-      redirect_to @snack, notice: 'Snack was successfully created.'
+    # byebug
+    @snacks = []
+    names_array = parse_names_csv(snack_params[:name])
+    names_array.each do |name|
+      @snacks << Snack.new(name: name, vendor: snack_params[:vendor], price: snack_params[:params])
+    end
+    
+    if @snacks.each(&:save).all?
+      redirect_to '/orders', notice: 'Snack was successfully created.'
     else
       render :new
     end
@@ -54,5 +59,9 @@ class SnacksController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def snack_params
       params.require(:snack).permit(:name, :vendor, :price)
+    end
+
+    def parse_names_csv(names_csv)
+      names_array = names_csv.gsub(/ */, "").split(",")
     end
 end
