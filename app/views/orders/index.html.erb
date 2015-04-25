@@ -8,7 +8,7 @@
         <h2>Ordering from</h2>
         <ul>
         <% @snacks.group("vendor").uniq.each do |snack| %>
-          <h4><li><%= snack.vendor.capitalize %></li></h4>
+          <h4><li><%= snack.vendor.capitalize if snack.vendor %></li></h4>
         <% end %>
         </ul>
         
