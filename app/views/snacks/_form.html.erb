@@ -11,19 +11,19 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :name %><br>
-    <%= f.text_field :name %>
+    <%= f.text_area :name, class: "form-control" %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :vendor %><br>
-    <%= f.text_field :vendor %>
+    <%= f.text_field :vendor, class: "form-control" %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :price %><br>
-    <%= f.number_field :price %>
+    <%= f.number_field :price, class: "form-control" %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form-group">
+    <%= f.submit "Add Snacks", class: "btn btn-primary" %>
   </div>
 <% end %>
