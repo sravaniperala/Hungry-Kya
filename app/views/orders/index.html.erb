@@ -15,8 +15,8 @@
   <tbody>
     <% @orders.each do |order| %>
       <tr>
-        <td><%= order.user %></td>
-        <td><%= order.snack %></td>
+        <td><%= order.user.name %></td>
+        <td><%= order.snack.name %></td>
         <td><%= order.quantity %></td>
         <td><%= link_to 'Show', order %></td>
         <td><%= link_to 'Edit', edit_order_path(order) %></td>
@@ -27,5 +27,39 @@
 </table>
 
 <br>
+
+<!-- Form for order -->
+<div>
+  <%= form_for(@order) do |f| %>
+    <% if @order.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@order.errors.count, "error") %> prohibited this order from being saved:</h2>
+
+        <ul>
+        <% @order.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :user_id, "Find Yourself"%>
+      <%= f.select :user_id, User.all.collect{|u| [u.name, u.id]} %>
+    </div>
+    <div class="field">
+      <%= f.label :snack_id, "choose your munchie"%>
+      <%= f.select :snack_id, Snack.all.collect{|s| [s.name, s.id]} %>
+    </div>
+    <div class="field">
+      <%= f.label :quantity %><br>
+      <%= f.number_field :quantity %>
+    </div>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+  <% end %>
+
+</div>
 
 <%= link_to 'New Order', new_order_path %>
