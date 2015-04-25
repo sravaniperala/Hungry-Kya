@@ -3,6 +3,10 @@ class OrdersController < ApplicationController
 
   # GET /orders
   def index
+    @order = Order.new
+    
+    @users = User.all
+    @snacks = Snack.all
     @orders = Order.all
   end
 
