@@ -28,7 +28,7 @@ class OrdersController < ApplicationController
     @order = Order.new(order_params)
 
     if @order.save
-      redirect_to @order, notice: 'Order was successfully created.'
+      redirect_to orders_path, notice: 'Order was successfully created.'
     else
       render :new
     end
@@ -37,7 +37,7 @@ class OrdersController < ApplicationController
   # PATCH/PUT /orders/1
   def update
     if @order.update(order_params)
-      redirect_to @order, notice: 'Order was successfully updated.'
+      redirect_to orders_path, notice: 'Order was successfully updated.'
     else
       render :edit
     end
