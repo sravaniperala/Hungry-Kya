@@ -16,8 +16,8 @@
         <div>
           <h2>Ordering from</h2>
           <ul>
-          <% @snacks.group("vendor").uniq("vendor").each do |snack| %>
-            <h4><li><%= snack.vendor.capitalize if snack.vendor %></li></h4>
+          <% @snacks.all.pluck("vendor").uniq.each do |vendor| %>
+            <h4><li><%= vendor.capitalize if vendor %></li></h4>
           <% end %>
           </ul>
           
