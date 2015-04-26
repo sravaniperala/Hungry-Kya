@@ -119,10 +119,10 @@
       <% @orders.each do |order| %>
         <tr>
           <td><b><%= order.user.name.capitalize if order.user%></b></td>
-          <td><%= order.snack.name if order.snack%></td>
+          <td><%= order.snack.name.capitalize if order.snack%></td>
           <td><%= order.quantity %></td>
           <td><%#= link_to 'Show', order %></td>
-          <td><%= link_to 'Edit', edit_order_path(order) %></td>
+          <!-- <td><%#= link_to 'Edit', edit_order_path(order) %></td> -->
           <td><%= link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         </tr>
       <% end %>
