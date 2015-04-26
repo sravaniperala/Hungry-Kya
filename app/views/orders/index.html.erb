@@ -1,3 +1,4 @@
+<%= render partial: "partials/flash", flash: flash %> 
 <% if @snacks.count == 0 %>
   <div class="central bg-image">
     <h1 class = "light-font">No munchies for you today. To Create Click</h1>
@@ -50,8 +51,9 @@
       </div> 
       
       <!-- Div for placing order form -->
-      <p id="notice"><%= notice %></p>
-
+      <!-- <p id="notice"><%#= notice %></p>
+      <p id="alert"><%#= alert %></p> -->
+      
       <div class="col-md-6">
         <!-- Form for order -->
         <div class="form-div">
@@ -71,11 +73,11 @@
 
             <div class="form-group">
               <%= f.label :user_id, "Find Yourself"%>
-              <%= f.select :user_id, User.users, class: "form-control" %>
+              <%= f.select :user_id, User.users, :include_blank => "Select Youself", class: "form-control" %>
             </div>
             <div class="form-group">
-              <%= f.label :snack_id, "choose your munchie"%>
-              <%= f.select :snack_id, Snack.snacks, class: "border-radius", class: "form-control" %>
+              <%= f.label :snack_id, "Choose your Munchie"%>
+              <%= f.select :snack_id, Snack.snacks, class: "border-radius", :include_blank => "Select Munchie", class: "form-control" %>
             </div>
             <div class="form-group">
               <%= f.label :quantity %>
