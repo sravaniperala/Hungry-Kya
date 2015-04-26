@@ -71,11 +71,11 @@
 
             <div class="form-group">
               <%= f.label :user_id, "Find Yourself"%>
-              <%= f.select :user_id, User.all.collect{|u| [u.name, u.id]}, class: "form-control" %>
+              <%= f.select :user_id, User.users, class: "form-control" %>
             </div>
             <div class="form-group">
               <%= f.label :snack_id, "choose your munchie"%>
-              <%= f.select :snack_id, Snack.all.collect{|s| [s.name, s.id]}, class: "border-radius", class: "form-control" %>
+              <%= f.select :snack_id, Snack.snacks, class: "border-radius", class: "form-control" %>
             </div>
             <div class="form-group">
               <%= f.label :quantity %>
