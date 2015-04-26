@@ -13,11 +13,11 @@
 
   <div class="form-group">
     <%= f.label :name %><br>
-    <%= f.text_area :name, placeholder: "Enter Comma Seperated values(CSV) for snacks name", class: "form-control" %>
+    <%= f.text_area :name, placeholder: "Enter Comma Seperated values(CSV) for snacks name", class: "form-control", required: true %>
   </div>
   <div class="form-group">
     <%= f.label :vendor %><br>
-    <%= f.text_field :vendor, placeholder: "Enter Vendor name", class: "form-control" %>
+    <%= f.text_field :vendor, placeholder: "Enter Vendor name", class: "form-control", required: true %>
   </div>
   <!-- <div class="form-group"> -->
     <%#= f.label :price %><br>
