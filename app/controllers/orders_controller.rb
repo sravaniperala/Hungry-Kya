@@ -25,6 +25,21 @@ class OrdersController < ApplicationController
 
   # POST /orders
   def create
+    snack = Snack.find(order_params[:snack_id]) rescue nil
+    user = User.find(order_params[:user_id]) rescue nil
+    unless user
+        send(:index)
+        flash.now[:alert] =  "Please select yourself from the list."
+        render action: "index" 
+        return
+    end
+    unless snack
+        send(:index)
+        flash.now[:alert] = "Please select your choice of snack."
+        render action: "index" 
+        return
+    end
+
     @order = Order.new(order_params)
 
     if @order.save
