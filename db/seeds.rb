@@ -11,12 +11,14 @@ cyborgs = ["Ankit Famiyal", "Sunil Sharma", "Alekhya Rudra",
   "Keerthana M", "Kiran Chinnakonda", "Kumaresh Devarajan", "Kumuda Rao", "Kunal Singh",
    "Lenin R", "Mahesh M", "Nishant Goel", "Nishant Samel", "Rashmi Agarwal", "Saravana Kumar",
     "Satish Perala", "Sravani Perala", "Swaroop Sethumadhavan", "Vijayanand Nandam",
-    "Vinod Kumar", "Yojana Menda", "Mano Bharati"]
+    "Vinod Kumar", "Yojana Menda", "Mano Bharati", "Mohnish Jadwani"]
 
 
   cyborgs.each { |name|
     User.find_or_create_by(name: name)
   }
+
+  puts "Users have been created successfully!"
 # Ankit Famiyal <ankit.famiyal@cybrilla.com>,
 # Sunil Sharma <sunil.sharma@cybrilla.com>,
 # Alekhya Rudra <alekhya.rudra@cybrilla.com>,
