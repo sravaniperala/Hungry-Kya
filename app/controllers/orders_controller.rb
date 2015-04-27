@@ -6,8 +6,8 @@ class OrdersController < ApplicationController
     @order = Order.new
     
     @users = User.all
-    @snacks = Snack.all
-    @orders = Order.all
+    @snacks = Snack.where("created_at > ? and created_at < ? ", Date.today.at_beginning_of_day, Date.today.at_end_of_day())
+    @orders = Order.where("created_at > ? and created_at < ? ", Date.today.at_beginning_of_day, Date.today.at_end_of_day())
   end
 
   # GET /orders/1
